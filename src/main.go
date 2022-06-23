@@ -117,4 +117,32 @@ func main() {
 	//Complex128 = Real e Imaginario float64
 	//Ejemplo : c:=10 + 8i
 
+	//Explicacion paquete fmt
+	//declaracion de variables
+	helloMessage := "Hello"
+	worldMessage := "world"
+
+	//Println
+	//Imprime en lineas diferentes
+	fmt.Println(helloMessage, worldMessage)
+	fmt.Println(helloMessage, worldMessage)
+
+	//Printf
+	//Imprime las lineas de manera mas especifica, indicandole el tipo de dato que va a recibir el mensaje que va a mostrar
+	//%s es para string, %d para entero, %v es para cualquier valor y el \n es para salto de linea
+	nombre := "Platzi"
+	cursos := 500
+	fmt.Printf("%s tiene mas de %d cursos\n", nombre, cursos)
+	fmt.Printf("%v tiene mas de %v cursos\n", nombre, cursos)
+
+	//Sprintf
+	//Genera un string pero no lo genera, solo lo guarda como string
+	message := fmt.Sprintf("%s tiene mas de %d cursos", nombre, cursos)
+	println(message)
+
+	//Tipo de dato que tiene una variable con la opcion : %T
+
+	fmt.Printf("helloMessage: %T\n", helloMessage)
+	fmt.Printf("cursos: %T\n", cursos)
+
 }
