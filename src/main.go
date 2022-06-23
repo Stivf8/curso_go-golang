@@ -33,4 +33,61 @@ func main() {
 	areaCuadrado := baseCuadrado * baseCuadrado
 	fmt.Println("El area del cuadrado es igual a: ", areaCuadrado)
 
+	//Operadores aritmeticos
+
+	x := 10
+	y := 50
+
+	//Suma
+	result := x + y
+	fmt.Println("Suma: ", result)
+
+	//Resta
+	result = x - y
+	fmt.Println("Resta: ", result)
+
+	//Multiplicacion
+	result = x * y
+	fmt.Println("Multiplicacion: ", result)
+
+	//Division
+	result = y / x
+	fmt.Println("Division: ", result)
+
+	//Modulo
+	result = y % x
+	fmt.Println("Modulo: ", result)
+
+	//Incremental
+	x++
+	fmt.Println("Incremental: ", x)
+
+	//Decremental
+	x--
+	fmt.Println("Decremental: ", x)
+
+	//Retos
+	//Rectangulo, trapecio y de un circulo
+
+	//Area de rectangulo
+	largo := 20
+	ancho := 10
+	areaRectangulo := largo * ancho
+	fmt.Println("El area del rectangulo es: ", areaRectangulo)
+
+	//Area de un trapecio
+	//la suma de las bases por la altura divido dos
+	base1Trapecio := 4
+	base2Trapecio := 10
+	alturaTrapecio := 4
+	areaTrapecio := ((base1Trapecio + base2Trapecio) * alturaTrapecio) / 2
+	fmt.Println("El area de unt trapecio es: ", areaTrapecio, "Centimetros cuadrados")
+
+	//Area de un circulo
+	//En la linea 7 ya contamos con el valor de pi
+	//Tener en cuenta el tipo de dato, float, entero etc
+	radioCirculo := 5.0
+	areaCirculo := (pi * (radioCirculo * radioCirculo))
+	fmt.Println("El area de un circulo es: ", areaCirculo, "Centimetros cuadrados")
+
 }
