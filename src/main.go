@@ -3,6 +3,7 @@ package main
 import "fmt"
 
 func main() {
+
 	//Declaracion de constantes
 	const pi float64 = 3.14
 	const pi2 = 3.15
@@ -145,4 +146,34 @@ func main() {
 	fmt.Printf("helloMessage: %T\n", helloMessage)
 	fmt.Printf("cursos: %T\n", cursos)
 
+	//llamo la funcion normalFunction
+	normalFunction("Stiven", "Ok!")
+
+	//llamo funcion returnValue
+	respuesta := returnValue(2)
+	fmt.Println("Desde funcion returnValue retorna: ", respuesta)
+
+	//llamo funcion doubleReturn que retorna dos valores, estos los asigno a dos variables
+	value1, value2 := dobleReturn(2)
+	//para tomar un solo valor asi la funcion te devuelva dos se realiza de la siguiente manera: (con raya al piso)
+	//value1, _ := dobleReturn(2)
+	println("retornando uno o varios datos desde funcion dobleReturn", value1, value2)
+
+}
+
+//FUNCIONES
+//cuando son multiples entradas, pueden ser definidas de una vez tipo : a,b int, c, d string
+func normalFunction(mensaje, confirmacion string) {
+
+	fmt.Println("hola te saludo desde la funcion NormalFunction", mensaje, confirmacion)
+}
+
+//Funciones que retornen 1 valor
+func returnValue(valor int) int {
+	return valor * 2
+}
+
+//Funcion que retoner 2 valores o mas
+func dobleReturn(valor1 int) (c, d int) {
+	return valor1, valor1 * 2
 }
