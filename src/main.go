@@ -159,6 +159,37 @@ func main() {
 	//value1, _ := dobleReturn(2)
 	println("retornando uno o varios datos desde funcion dobleReturn", value1, value2)
 
+	//Ciclos en Go solo el for condicional
+
+	for i := 0; i <= 10; i++ {
+		fmt.Println("Soy el ciclo for condicional: ", i)
+	}
+
+	//este disminuye el i
+
+	for i := 10; i >= 0; i-- {
+		fmt.Println("Soy el ciclo for condicional decayendo: ", i)
+	}
+
+	// For While (hasta que una condicion se cumpla)
+	counter := 0
+	for counter <= 10 {
+		fmt.Println("Soy ciclo for While", counter)
+		counter++
+	}
+
+	//For forever quiere decir que va a ser iterando hasta la eternidad
+
+	counterForever := 0
+	for {
+		fmt.Println("counterFoverever es igual a:", counterForever)
+		counterForever++
+		//esta condicional se utiliza para salir del forever
+		if counterForever == 20 {
+			break
+		}
+	}
+
 }
 
 //FUNCIONES
