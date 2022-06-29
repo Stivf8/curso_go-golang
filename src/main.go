@@ -266,6 +266,27 @@ func main() {
 
 	}
 
+	//Defer, antes de morir la primera funcion va ejecutar la otra o todas las lineas que tenga despues
+	//quedanto en este caso Mundo, Hola, pued eutilizarse para cerrar conexiones o para condiciones que si o si deben pasar pero al final, la buena practica es un defer por funcion
+	defer fmt.Println("Hola")
+	fmt.Println("Mundo")
+
+	//Continue y break se utilizan en el for
+	for i := 0; i < 10; i++ {
+		fmt.Println(i)
+		if i == 2 {
+			fmt.Println("es 2")
+			//CONTINUA EL CICLO CON NORMALIDAD, se utiliza para digamos un caso en que a pesar de que suceda x cosa, continue la ejecucion del codigo de la funcion por ejemplo
+			//para despues procesarlo etc
+			continue
+		}
+		//break es cuando pasa algo determinado, quiero que ese codigo ya no se ejecute
+		if i == 8 {
+			fmt.Println("es un Break")
+			break
+		}
+	}
+
 }
 
 //Funcion que valida si es par o impar
