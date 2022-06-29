@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"strconv"
+)
 
 func main() {
 
@@ -188,6 +192,80 @@ func main() {
 		if counterForever == 20 {
 			break
 		}
+	}
+
+	//Condicional IF en GO
+	valor1 := 1
+	if valor1 == 1 {
+		fmt.Println("Soy condicional IF es igual a 1")
+	} else {
+		fmt.Println("No es igual a 1")
+	}
+
+	//Con AND
+	valor2 := 2
+	if valor1 == 1 && valor2 == 3 {
+		fmt.Println("El AND es VERDAD")
+	} else {
+		fmt.Println("El AND es FALSO")
+	}
+
+	//Con OR
+	if valor1 == 1 || valor2 == 2 {
+		fmt.Println("Soy OR, alguna condicion cumplio")
+	} else {
+		fmt.Println("Soy OR, ninguna de las condiciones funciono")
+	}
+
+	//Convertir texto a numero
+	value, err := strconv.Atoi("53")
+	//nil es la manera en go para validar si la ejecucion no tuvo errores
+	if err != nil {
+		//Mostramos el log de que paso, que error ocurrio
+		log.Fatal(err)
+	}
+	fmt.Println("El valor convertido: ", value)
+
+	// 1. se requiere crear una funcion de un numero que recibe
+	// esa funcion es par o impar
+
+	//Llamamos a la funcion imparOpar para saber si el numero 8 es par
+	imparOpar(80)
+
+	// 2. se requiere una funcion que reciba un usuario
+	// un pasword y revise si es valido o no, se espera un retorno
+	// true
+
+	//Llamamos a la funcion LogIn para validar los datos del usuario ingresados
+	resultadoLogIn := LogIn("manuel@hotmail.com", "manuelitoPte")
+	println("El reslutado de inicio de sesion fue: ", resultadoLogIn)
+
+}
+
+//Funcion que valida si es par o impar
+func imparOpar(num1 int) {
+	resultImparOpar := num1 % 2
+	if resultImparOpar == 0 {
+		fmt.Println("El numero", num1, "es PAR")
+	} else {
+		fmt.Println("El numero", num1, "es IMPAR")
+	}
+
+}
+
+//Funcion login valida si el usario y contrasena ingresada son Ok!
+//IMPORTANTE DECIR QUE VA A RETORNAR EN ESTE CASO UN BOOLEAN
+func LogIn(user, password string) bool {
+	//En teoria estos datos se validan en alguna base de datos, por lo tanto se generan las varialbes de DBpassword y DBuser
+	DBpassword := "manuelitoPte"
+	DBuser := "manuel@hotmail.com"
+
+	if user == DBuser && password == DBpassword {
+		resultadoLogIn := true
+		return resultadoLogIn
+	} else {
+		resultadoLogIn := false
+		return resultadoLogIn
 	}
 
 }
