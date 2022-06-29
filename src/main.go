@@ -240,6 +240,32 @@ func main() {
 	resultadoLogIn := LogIn("manuel@hotmail.com", "manuelitoPte")
 	println("El reslutado de inicio de sesion fue: ", resultadoLogIn)
 
+	//Utilizacion de SWITCH cuando estamos ejecutando muchas ejecuciones de IF, es importante validar la posibilidad de usar SWITCH
+	//puede ser representado de muchas maneras
+	//esta esta:
+	//modulo := 5 % 2
+	//y la mas utilizada es esta: agregando en el switch toda la operacion
+	switch modulo := 4 % 2; modulo {
+	case 0:
+		fmt.Println("Es Par")
+		//en caso de que no se cumplan ninguno de los case impuestos anterior mente el default se ejecuta
+	default:
+		fmt.Println("Es impar")
+	}
+
+	//SWITCH sin condicion, se usa para una misma variable y si es necesario utilziar un if anidado
+
+	value5 := 200
+	switch {
+	case value5 > 100:
+		fmt.Println("es mayor a 100")
+	case value5 < 0:
+		fmt.Print("es mayor a 0")
+	default:
+		fmt.Println("no cumple ningun case")
+
+	}
+
 }
 
 //Funcion que valida si es par o impar
