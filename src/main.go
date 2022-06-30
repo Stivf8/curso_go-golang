@@ -13,6 +13,18 @@ func main() {
 	const pi float64 = 3.14
 	const pi2 = 3.15
 
+	//INSTANCIAMOS CLASE O STRUCT carro
+
+	//creamos nuevo carro
+	miCarro := carro{marca: "Tesla", year: 2026}
+	//Imprimimos el objeto para ver su estructura
+	//el Defer es solo para ver al final la impresion
+	defer fmt.Println("soy el objeto carro y tengo esta estructura: ", miCarro)
+	//Otra manera de instanciar, como clase vacia
+	var otroCarro carro
+	otroCarro.marca = "Ford"
+	defer fmt.Println("soy el objeto carro y tengo esta estructura: ", otroCarro)
+
 	fmt.Println("pi: ", pi, "pi2: ", pi2)
 
 	//Declaracion de variables enteras que no estaba creada
@@ -426,3 +438,14 @@ func returnValue(valor int) int {
 func dobleReturn(valor1 int) (c, d int) {
 	return valor1, valor1 * 2
 }
+
+//STRUCT O CLASES
+//DEFINIMOS LA CLASE O STRUCT de carros
+
+type carro struct {
+	//definimos los atributos
+	marca string
+	year  int
+}
+
+//para saber como se instancia ir a la linea 15 del codigo
