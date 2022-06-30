@@ -287,6 +287,38 @@ func main() {
 		}
 	}
 
+	//Array - Arreglos
+	var array [4]int
+	array[0] = 1
+	array[1] = 2
+	fmt.Println("soy el array mi valor es:", array)
+	//len, dice cuantos elementos hay en el arreglo
+	//cap, indica la capacidad maxima de ese array
+	fmt.Println(len(array), cap(array))
+
+	//Slice, declaracion similiar al array pero no se le indica la cantidad de valores que va a tener
+	slice := []int{1, 2, 3, 4, 5, 6}
+	println("Slice", slice, len(slice), cap(slice))
+
+	//se utiliza para manejar array slice o listas para poder interactuar con cada uno de los elementos
+	//Metodos en el slice
+	//Imprime elemento 0
+	fmt.Println(slice[0])
+	//Imprime hasta el elemento 3, es exclusivo el ultimo parametro
+	fmt.Println(slice[:3])
+	//desde el indice 2 al 4, excluye el 4 imprime hasta el 3
+	fmt.Println(slice[2:4])
+	//del 4 en adelante, el primer elemento si es inclusivo
+	fmt.Println(slice[4:])
+	//Como adicionar elementos al slice
+	//Append
+	slice = append(slice, 7)
+	fmt.Println(slice)
+	//agregar otra lista al slice, se debe utilizar el append, pero se le pasa la variable con ...
+	newSlice := []int{8, 9, 10}
+	slice = append(slice, newSlice...)
+	fmt.Println(slice)
+
 }
 
 //Funcion que valida si es par o impar
