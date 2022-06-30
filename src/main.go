@@ -1,6 +1,7 @@
 package main
 
 import (
+	mispaquetes "curso_go-golang-main/src/mispaquetes"
 	"fmt"
 	"log"
 	"strconv"
@@ -349,6 +350,17 @@ func main() {
 	//Ejercicio de si es Palindromo o no es palindromo (se lee de la misma manera de izquiera a derecha que de derecha a izquierda) como ama, y no palindromo amor o roma
 	//Para esto llamamos a la funcion esPalindromo
 	esPalindromo("Ama")
+
+	//Modificadores de acceso, palabras claves para indicar si una variable o funcion tenga acceso publico o privado al resto del packete/carpeta o a otros
+	//en go, Golang si la primera letra es mayuscula significa publico, si es minuscula es privado
+	//vamos a traer el paquete de forma automatica
+	var otroCarro2 mispaquetes.CarroPublico
+	otroCarro2.Marca = "ferrari"
+	defer fmt.Println("desde el paquete mispaquetes", otroCarro2)
+	//para hacerlo de forma manual, arriba del todo importamos el paquete con la ruta despues de src de nuestra instalacion de go
+	//import "curso_go-golang-main/src/mispaquetes"
+
+	mispaquetes.ImprimirMensaje("GOOL")
 
 }
 
