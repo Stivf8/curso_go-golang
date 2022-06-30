@@ -352,6 +352,7 @@ func esPalindromo(text string) {
 		//aqui pasamos el string de manera alrevez
 		textAlrevez += string(text[i])
 	}
+	//sentencia if, si el texto que le pasamos es igual al text pero en sentido contrario es palindromo
 
 	if text == textAlrevez {
 		fmt.Println("Es palindromo")
@@ -359,7 +360,25 @@ func esPalindromo(text string) {
 		fmt.Println("No es palindromo")
 	}
 
-	//sentencia if, si el texto que le pasamos es igual al text pero en sentido contrario es palindromo
+	//Diccionario o Maps
+	//Make puede ser utilizado para crear maps, pero tambien otras variables
+	m := make(map[string]int)
+
+	//agregar valor, la llave seria Jose, Pepito
+	m["Jose"] = 14
+	m["Pepito"] = 20
+
+	fmt.Println(m)
+
+	//recorrer por toda la lista tomando llave y valor, recorrer map sin llave, forma aleatorea
+	for i, v := range m {
+		fmt.Println(i, v)
+	}
+	//Como obtener uno de los valores, encontrar un valor, el valor de jose
+	//para saber si la llave que le estamos envando existe, agregamos la variable ok, en dado caso de que exista lo retornara true
+	value9, ok := m["Jose"]
+	fmt.Println(value9, ok)
+	//UTILIZAR MAPS ES MAS EFICIENTE EN CONTRA SLICES Y ARRAYS YA QUE UTILIZA CONCURRENCIA NATIVAMENTE
 
 }
 
