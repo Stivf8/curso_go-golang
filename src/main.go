@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -318,6 +319,47 @@ func main() {
 	newSlice := []int{8, 9, 10}
 	slice = append(slice, newSlice...)
 	fmt.Println(slice)
+
+	//COMO RECORRER CADA UNO DE LOS ELEMENTOS DEL SLICE
+	//definimos slice tipo string
+	sliceString := []string{"hola", "que", "hace"}
+	//recorremos el indice con un for y utilizamos el range para recorrelo todo
+	//recordar, para omitir una variable, usamos _ en el caso lo pondriamos en la i y con esto lo omitiriamos
+	for i, valor := range sliceString {
+		fmt.Println("recorriendo el arreglo", i, valor)
+	}
+	//si se desea saber solo el indice, eliminamos valor y dejamos unicamente el i de indice, algo asi:
+	/*
+		for i := range sliceString {
+			fmt.Println("recorriendo el arreglo", i)
+		}*/
+
+	//Ejercicio de si es Palindromo o no es palindromo (se lee de la misma manera de izquiera a derecha que de derecha a izquierda) como ama, y no palindromo amor o roma
+	//Para esto llamamos a la funcion esPalindromo
+	esPalindromo("Ama")
+
+}
+
+//Ejercicio de si es Palindromo o no es palindromo (se lee de la misma manera de izquiera a derecha que de derecha a izquierda) como ama, y no palindromo casas
+//Para esto realizamos una funcion
+func esPalindromo(text string) {
+	var textAlrevez string
+	//con esta linea de codigo nos aseguramos que lo que vamos a procesar este en minuscula para evitar inconvenientes si ingresan valores en mayuscula
+	text = strings.ToLower(text)
+	//for con sentido inverso
+	for i := len(text) - 1; i >= 0; i-- {
+		//el =+ es lo mismo que hacer textalrevez = textalrevez
+		//aqui pasamos el string de manera alrevez
+		textAlrevez += string(text[i])
+	}
+
+	if text == textAlrevez {
+		fmt.Println("Es palindromo")
+	} else {
+		fmt.Println("No es palindromo")
+	}
+
+	//sentencia if, si el texto que le pasamos es igual al text pero en sentido contrario es palindromo
 
 }
 
