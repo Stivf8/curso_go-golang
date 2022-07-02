@@ -362,6 +362,41 @@ func main() {
 
 	mispaquetes.ImprimirMensaje("GOOL")
 
+	//PUNTEROS Y STRUCTS
+	// guardar el puntero o posicion de una variable
+	// el & es para acceder a la posicion de la variable en memoria
+	//el * puesto al lado del puntero es para traer lo opuesto, el valor
+
+	abc := 50
+	abcPuntero := &abc
+	defer fmt.Println(*abcPuntero, abcPuntero)
+	//Los punteros se usan mas para mover unas funciones a otra libreria o paquete
+	// instanciamos y luego llamamos a el metodo
+	myPC := pc{ram: 16, disco: 1000, marca: "hp"}
+	myPC.ping()
+	//duplicamos ram con el metodo
+	myPC.duplicarRam()
+	myPC.ping()
+
+}
+
+//funcion struct de mypc con funcion
+
+type pc struct {
+	disco int
+	ram   int
+	marca string
+}
+
+//metodo de struct
+func (myPC pc) ping() {
+	fmt.Println(myPC, "pong")
+}
+
+//metodo duplicarRam
+//cuando ponemos el * significa que vamos a acceder a sus valores mediante el puntero
+func (myPC *pc) duplicarRam() {
+	myPC.ram = myPC.ram * 2
 }
 
 //Ejercicio de si es Palindromo o no es palindromo (se lee de la misma manera de izquiera a derecha que de derecha a izquierda) como ama, y no palindromo casas
