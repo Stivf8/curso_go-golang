@@ -1,4 +1,4 @@
-package mispaquetes2
+package mispaquetes
 
 // Computador struct publico
 // recordar las iniales para un struct y para sus variables para que sean publicos deben ser con Mayuscula
