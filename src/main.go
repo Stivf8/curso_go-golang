@@ -14,5 +14,4 @@ func main() {
 	//se le pasa el parametro en cuanto sera aumentada la Ram
 	myPC.AumentarRam(10)
 
-	fmt.Println(myPC)
 }
