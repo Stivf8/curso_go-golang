@@ -1,31 +1,37 @@
 package main
 
-//importa carpeta o paquete donde estan nuestras herramientas
 import (
-	"curso_go-golang-main/src/mispaquetes"
 	"fmt"
+	"sync"
+	"time"
 )
 
-//Interfaces por lo general se utilizan para centralizar los metodos o funciones que pueden estar en varios Structs
-//Calcular Area de Cuadrado y rectangulo
-//SE AGREGA LA INTERFAZ QUE RECIBE LAS DOS FUNCIONES O METODOS "Area"
+//TODO ESTE CODIGO USUALMENTE NO SE UTILIZA XD, MEJOR LOS CHANNEL
+func say(text string, wg *sync.WaitGroup) { // Gorutine
 
-//funcion principal que se ejecuta
+	defer wg.Done() // Esta linea se va a ejecutar hasta el final de la funcion, y de esta forma libera el gorutine del WaitGroup
+
+	fmt.Println(text)
+}
+
 func main() {
-	//instanciamos los structs
-	pCuadrado := mispaquetes.Cuadrado{Base: 2}
-	pRectangulo := mispaquetes.Rectangulo{Base: 2, Altura: 4}
-	fmt.Println("Cuadrado: ", pCuadrado, "Rectangulo", pRectangulo)
-	//utilizamos el metodo publico Calcular para acceder a la interfaz privada Figuras2D la cual ejecuta los metodos compartidos Area() publicos de los paquetes cuadrado y rectangulo
-	fmt.Println("Cuadrado:")
-	mispaquetes.Calcular(pCuadrado)
-	fmt.Println("Rectangulo:")
-	mispaquetes.Calcular(pRectangulo)
-	//lista de interfaces
-	fmt.Println("Lista de interfaces:")
-	//En go en las lsitas o slides o arrays necesita definir el parametro que va a contener esa lista, int o string etc, no varios tipos de datos en una misma
-	//la manera de simular una lista con multiples tipos de datos es: []interface{} al definir el slides
-	miinterfaz := []interface{}{"Hola", 12, 4.2}
-	//imprimimos el slides con ... (toma cada uno de los elementos e imprime de manera individual)
-	fmt.Println(miinterfaz...)
+
+	var wg sync.WaitGroup // El paquete sync permite interacturar de forma primitiva con las gorutine. Variable que acomula un conjunto de gorutines y los va liberando poco a poco
+
+	fmt.Println("Hello")
+
+	wg.Add(1) // Indicamos que vamos a agregar 1 Gorutine al WaitGroup para que espere su ejecucion antes de que la gurutine base (main) muera, y así le de tiempo a la siguiente gorutine de ejecutarse
+
+	go say("world", &wg) // la palabra reservada go ejecutará la funcion de forma concurrente
+
+	wg.Wait() // Funcion del WaitGroup que sirve para decirle al gorutine principal (main) que espere hasta que todas las gorutine del WaitGroup finalicen, es decir, hasta que se ejecute 'defer wg.Done()' en cada una de las goroutines
+
+	go func(text string) { // Funciona anonima
+		fmt.Println(text)
+	}("Adios")
+
+	time.Sleep(time.Second * 1) // ! Funcion para que cuando llegue a esta linea espere el tiempo indicado (lo suficiente para que la Gorutine ejecute su funcion de forma concurrente)
+
+	// Nota: Para fines practicos se hace uso de la funcion Sleep(), pero en realidad NO es una buena practica, es mejor utilizar los WaitGroups
+
 }
