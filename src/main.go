@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-//TODO ESTE CODIGO USUALMENTE NO SE UTILIZA XD, MEJOR LOS CHANNEL
+//TODO ESTE CODIGO USUALMENTE NO SE UTILIZA, A NO SER QUE SE REQUIERA UNA OPTIMIZACION GIGANTE Y PARA TAREAS MUY PESADAS, LOS CHANNLES SE UTILIZAN PARA TAREAS MAS COMUNES
 func say(text string, wg *sync.WaitGroup) { // Gorutine
 
 	defer wg.Done() // Esta linea se va a ejecutar hasta el final de la funcion, y de esta forma libera el gorutine del WaitGroup
