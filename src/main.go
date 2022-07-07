@@ -1,37 +1,92 @@
 package main
 
-import (
-	"fmt"
-	"sync"
-	"time"
-)
+import "fmt"
 
-//TODO ESTE CODIGO USUALMENTE NO SE UTILIZA, A NO SER QUE SE REQUIERA UNA OPTIMIZACION GIGANTE Y PARA TAREAS MUY PESADAS, LOS CHANNLES SE UTILIZAN PARA TAREAS MAS COMUNES
-func say(text string, wg *sync.WaitGroup) { // Gorutine
+//Range, Close y Select en channels
+//como acceder a los valores de los channels y como manejar multiples channels
 
-	defer wg.Done() // Esta linea se va a ejecutar hasta el final de la funcion, y de esta forma libera el gorutine del WaitGroup
-
-	fmt.Println(text)
+func fibonacci(c, quit chan int) {
+	x, y := 0, 1
+	for {
+		select {
+		case c <- x:
+			x, y = y, x+y
+		case <-quit:
+			fmt.Println("quit")
+			return
+		}
+	}
 }
 
 func main() {
+	c := make(chan int)
+	quit := make(chan int)
 
-	var wg sync.WaitGroup // El paquete sync permite interacturar de forma primitiva con las gorutine. Variable que acomula un conjunto de gorutines y los va liberando poco a poco
+	// go func()... se lanza de manera concurrente:
+	// la línea fmt.Println(<-c) queda en espera hasta que haya algo que leer de <-c.
+	// Al ser lanzado concurrentemente, mientras dicha línea espera, se va a la ejecución de fibonacci(c, quit),
+	// que guardará valores en c <- x tantas veces se produzca la espera de la línea fmt.Println(<-c).
+	// Una vez sale del bucle, pasa a esperar case <-quit, que será satisfecho con quit <- 0, por lo que imprimirá "quit" y finalizará
+	// el programa.
+	go func() {
+		for i := 0; i < 10; i++ {
+			fmt.Println(<-c)
+		}
+		quit <- 0
+	}()
+	fibonacci(c, quit)
+}
 
-	fmt.Println("Hello")
+func main2() {
 
-	wg.Add(1) // Indicamos que vamos a agregar 1 Gorutine al WaitGroup para que espere su ejecucion antes de que la gurutine base (main) muera, y así le de tiempo a la siguiente gorutine de ejecutarse
+	//primer canal
+	//maneja dos datos al mismo tiempo
 
-	go say("world", &wg) // la palabra reservada go ejecutará la funcion de forma concurrente
+	c := make(chan string, 2)
+	//insertamos mensaje 1
+	c <- "mensaje 1"
+	//insertamos mensaje 2
+	//c <- "mensaje 2"
 
-	wg.Wait() // Funcion del WaitGroup que sirve para decirle al gorutine principal (main) que espere hasta que todas las gorutine del WaitGroup finalicen, es decir, hasta que se ejecute 'defer wg.Done()' en cada una de las goroutines
+	//len lo que hace es decir cuantos datos hay dentro de x, en este caso channel, en este caso dira cuantas goRoutines tiene el channel
+	//cap lo que hace es cuanta es la cantidad maxima que puede almacenar el channel
 
-	go func(text string) { // Funciona anonima
-		fmt.Println(text)
-	}("Adios")
+	fmt.Println(len(c), cap(c))
 
-	time.Sleep(time.Second * 1) // ! Funcion para que cuando llegue a esta linea espere el tiempo indicado (lo suficiente para que la Gorutine ejecute su funcion de forma concurrente)
+	//como hacer el recorrido de cada uno de los datos de los canales
+	//Range y Close
+	//Close lo que hace es decirle al RunTime de Go que cierre el canal, y quiere decir que ese canal no va a recibir mas datos, a pesar de que pueda.
+	//lo ideal es cerrar el canal cuando ya no se quieran utilizar y sabes que no vas a guardar datos
+	close(c)
+	//range ayuda a hacer el recorrido de una lista o en este caso el channel
+	for message := range c {
+		fmt.Println(message)
+	}
+	//cuando manejamos multiples canales, y no se tiene certeza de cual de los canales va a responder primero, utilizamos Select
+	email1 := make(chan string, 1)
+	email2 := make(chan string, 1)
+	//invocamos la funcion mensaje y la enviamos en una goRoutine, le enviamos el mensaje o Email y le enviamos el canal 1 o email1
+	//en este punto no sabemos cual se va a ejecutar primero entonces usamos Select
+	go mensaje("mensaje 1", email1)
+	go mensaje("mensaje 2", email2)
+	//Select
+	// se debe conocer la cantidad de datos que el channel va a manejar por lo que se utiliza un for
+	// indice va a ser 0 y que i va a ser menor a 2 porque tenemos ejecucion canal 1 canal 2, y cada iteracion suma 1
+	for i := 0; i <= 2; i++ {
+		select {
+		//en caso de que mensaje 1 venga de email 1
+		case m1 := <-email1:
+			fmt.Println("Email recibido de email1", m1)
+			//en caso de que mensaje 2 venga de email 2
+		case m2 := <-email2:
+			fmt.Println("Email recibido de email2", m2)
+		}
+	}
 
-	// Nota: Para fines practicos se hace uso de la funcion Sleep(), pero en realidad NO es una buena practica, es mejor utilizar los WaitGroups
+}
 
+//funcion que guarda un mensaje en un canal
+//recibe dato tipo string y un dato de tipo canal
+func mensaje(text string, c chan string) {
+	c <- text
 }
