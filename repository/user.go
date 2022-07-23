@@ -13,7 +13,7 @@ type UserRepository interface {
 	//tendra el insert, recibe el contexto, el usuario del modelo y retorna error en caso de
 	InsertUser(ctx context.Context, user *models.User) error
 	//definimos otro metodo, que recibe contexto, el id del usuario y retorna el Usuario en dado caso el error
-	GetUserByID(ctx context.Context, id int64) (*models.User, error)
+	GetUserByID(ctx context.Context, id string) (*models.User, error)
 	//cerrar conexionas a base de datos
 	//devuelve error
 	Close() error
@@ -34,7 +34,7 @@ func InsertUser(ctx context.Context, user *models.User) error {
 }
 
 //definimos metodo get user, recibe contexto y id, este devuelve lo que la implementacion hace
-func GetUserByID(ctx context.Context, id int64) (*models.User, error) {
+func GetUserByID(ctx context.Context, id string) (*models.User, error) {
 	return implementation.GetUserByID(ctx, id)
 }
 

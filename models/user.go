@@ -6,7 +6,7 @@ package models
 type User struct {
 	//json suele utilizar minusculas
 	//go definimos en mayuscula para que sea publico
-	Id       int64  `json:"id"`
+	Id       string `json:"id"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
